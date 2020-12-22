@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import theme from "./theme";
+import { ThemeProvider } from "@material-ui/core";
 
 // redux binder for react
 // import { Provider } from "react-redux";
@@ -11,10 +13,11 @@ import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   // <Provider store={store}>
-    <React.StrictMode>
+  <React.StrictMode>
+    <ThemeProvider theme={theme}>
       <App />
-    </React.StrictMode>,
-  // </Provider>,
+    </ThemeProvider>
+  </React.StrictMode>,
   document.getElementById("root")
 );
 

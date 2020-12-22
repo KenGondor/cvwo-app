@@ -1,10 +1,12 @@
-import React from 'react';
-
+import React from "react";
+import PaneHeader from "./PaneHeader";
+import TaskList from "./TaskList";
 
 export default function ListPane() {
-    return(
-        <div>
-            <h1>Hellos this is Lcdeffffffffffffffffist Pane</h1>
-        </div>
-    );
+  return (
+    <div>
+      <PaneHeader />
+      <TaskList />
+    </div>
+  );
 }
