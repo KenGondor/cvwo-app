@@ -26,14 +26,14 @@ export default function Home() {
         <Header />
       </Grid>
       <Grid item container direction="row">
-        <Grid xs={0} sm={2} />
-        <Grid item xs={12} sm={4} className={classes.listGrid} directiom="row">
+        <Grid xs={0} sm={1} />
+        <Grid item xs={12} sm={5} className={classes.listGrid} directiom="row">
           <TaskList />
         </Grid>
-        <Grid item xs={0} sm={4} className={classes.viewGrid}>
+        <Grid item xs={0} sm={5} className={classes.viewGrid}>
           frfreferferferfeferferferferferfer
         </Grid>
-        <Grid xs={0} sm={2} />
+        <Grid xs={0} sm={1} />
       </Grid>
     </Grid>
   );
