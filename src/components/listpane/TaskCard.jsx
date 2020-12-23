@@ -9,8 +9,8 @@ import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 750,
-    maxHeight: 75,
+    height: 50,
+    width: '100%'
   },
   bullet: {
     display: "inline-block",
@@ -19,6 +19,7 @@ const useStyles = makeStyles({
   },
   title: {
     fontSize: 17,
+    flex: 1,
   },
   pos: {
     marginBottom: 12,
@@ -41,22 +42,13 @@ export default function TaskCard(props) {
             gutterBottom
             variant='h3'
             >
-              {bull}
-            Word of the Day
+              {props.name}
           </Typography>
-        </Grid>
-        <Typography className={classes.pos} color="textSecondary">
-          adjective
-        </Typography>
-        <Typography variant="body2" component="p">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
-        </Typography>
-      </CardContent>
       <CardActions>
         <Button size="small">Learn More</Button>
       </CardActions>
+        </Grid>
+      </CardContent>
     </Card>
   );
 }
