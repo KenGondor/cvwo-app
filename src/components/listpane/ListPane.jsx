@@ -1,12 +1,18 @@
 import React from "react";
-import PaneHeader from "./PaneHeader";
+import { Grid, makeStyles, Typography } from "@material-ui/core";
 import TaskList from "./TaskList";
+import AddTaskBar from "./AddTaskBar";
 
-export default function ListPane() {
+//component for laying out the view correctly
+export default function ListPane(props) {
   return (
-    <div>
-      <PaneHeader />
-      <TaskList />
-    </div>
+    <Grid container direction="column">
+      <Grid container item>
+        <TaskList />
+      </Grid>
+      <Grid container item>
+        <AddTaskBar />
+      </Grid>
+    </Grid>
   );
 }

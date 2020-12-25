@@ -1,24 +1,24 @@
 // home page of the application
 import React from "react";
-import { Grid, makeStyles } from "@material-ui/core";
+import { Grid, makeStyles, Typography } from "@material-ui/core";
 import Header from "../components/Header";
-import TaskList from "../components/listpane/TaskList";
-// import ListPane from "../components/listpane/ListPane.jsx";
-import image from '../images/wallpaper.jpg';
+import ListPane from "../components/listpane/ListPane";
+import Image from "../images/wallpaper.jpg";
 
 const useStyles = makeStyles({
   root: {
-    backgroundImage: `url(${image})`,
-    backgroundSize: 'cover'
+    height: "100vh",
+    backgroundImage: `url(${Image})`,
+    backgroundSize: "cover",
   },
-  drawer: {
-    backgroundColor: "grey",
+  viewbox: {
+    backgroundColor: "white",
   },
-  listGrid: {
-    backgroundColor: "lightblue",
+  list: {
+    borderRadius: 5,
   },
-  viewGrid: {
-    backgroundColor: 'pink'
+  task: {
+    backgroundColor: "blue",
   },
 });
 
@@ -26,24 +26,13 @@ export default function Home() {
   const classes = useStyles();
   return (
     <Grid container direction="column" className={classes.root}>
-      <Grid item container className={classes.header}>
-        <Header />
-      </Grid>
-      <Grid item container direction="row">
-        <Grid xs={0} sm={2} />
-        <Grid
-          item
-          xs={12}
-          sm={5}
-          className={classes.listGrid}
-          directiom="row"
-        >
-          <TaskList />
+      <Header />
+      <Grid container>
+        <Grid item xs={0} sm={1} />
+        <Grid item xs={12} sm={10} className={classes.viewbox}>
+          <ListPane />
         </Grid>
-        <Grid item xs={0} sm={3} className={classes.viewGrid}>
-          frfreferferferfeferferferferferfer
-        </Grid>
-        <Grid xs={0} sm={2} />
+        <Grid xs={0} sm={1} />
       </Grid>
     </Grid>
   );

@@ -6,22 +6,23 @@ import PetsTwoTone from '@material-ui/icons/PetsTwoTone';
 const useStyles = makeStyles({
     bar: {
         position: 'relative',
-        zIndex: 1201 
+        zIndex: 1201,
+        borderRadius: 10,
     },
     typo: {
         flex: 1.
     }
 });
 
-export default function Header() {
+export default function Header(props) {
   const classes = useStyles();
     return (
     <AppBar className={classes.bar}>
-      <Toolbar>
+      <Toolbar variant='dense'>
         <IconButton>
           <MenuIcon />
         </IconButton>
-        <Typography variant='h6' xs={0} className={classes.typo}>
+        <Typography variant='h6'  className={classes.typo}>
             Don't Forget the Milk
         </Typography>
         <PetsTwoTone />
