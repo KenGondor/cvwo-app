@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   input: {
     marginLeft: 5,
     marginRight: 5,
-  },
+  }, 
 }));
 
 export default function AddTaskBar() {

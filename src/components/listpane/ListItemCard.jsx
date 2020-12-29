@@ -2,12 +2,10 @@ import React from "react";
 import {
   Paper,
   Checkbox,
-  Grid,
   IconButton,
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import VisibilityIcon from "@material-ui/icons/Visibility";
 
 const useStyles = makeStyles((theme) => ({
   root: {
