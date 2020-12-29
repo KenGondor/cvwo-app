@@ -1,3 +1,10 @@
 // defined constants for action types
-export const FETCH_TASKS = 'FETCH_TASKS';
-export const NEW_TASK = 'NEW_TASK';
+const types = {
+    FETCH_TASKS: 'FETCH_TASKS',
+    NEW_TASK: 'NEW_TASK',
+    UPDATE_TASK: 'UPDATE_TASK',
+    DISPLAY_TASK: 'DISPLAY_TASK',
+    SET_FILTER: 'SET_FILTER'
+}
+
+export default types;
