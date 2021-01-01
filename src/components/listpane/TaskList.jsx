@@ -1,16 +1,12 @@
 import {
-  Checkbox,
-  Grid,
-  IconButton,
   List,
   ListItem,
   makeStyles,
-  Paper,
-  Typography,
 } from "@material-ui/core";
 import React from "react";
+import { connect } from 'react-redux'
 import ListItemCard from "./ListItemCard";
-import data from "../../data";
+import { fetchTasks } from '../../redux/actions/tasksActions';
 
 const useStyles = makeStyles({
   list: {
@@ -20,12 +16,16 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TaskList() {
+const mapStateToProps = state => ({
+  tasks: state.tasks
+});
+
+function TaskList({ tasks }) {
   const classes = useStyles();
 
   return (
     <List className={classes.list}>
-      {data.map((task) => (
+      {tasks.map((task) => (
         <ListItem key={task.id}>
           <ListItemCard {...task} />
         </ListItem>
@@ -33,3 +33,5 @@ export default function TaskList() {
     </List>
   );
 }
+
+export default connect(mapStateToProps)(TaskList);

@@ -1,7 +1,7 @@
 // home page of the application
 import React from "react";
 import { Grid, makeStyles, Typography } from "@material-ui/core";
-import Header from "../components/Header";
+import Header from "../components/Header.jsx";
 import ListPane from "../components/listpane/ListPane";
 import Image from "../images/wallpaper.jpg";
 
