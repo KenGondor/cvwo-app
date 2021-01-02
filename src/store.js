@@ -4,15 +4,7 @@ import thunk from 'redux-thunk';
 import rootReducer from './redux/reducers';
 
 const initialState = {
-    tasks: [{
-        id: 1,
-        name: 'Placeholder Task',
-        start: '2020-12-30',
-        due: '2021-01-25',
-        priority: 3,
-        description: 'due soon',
-
-    }],
+    tasks: [],
     displayedTask: {
         id: 1,
         name: 'Placeholder Task',

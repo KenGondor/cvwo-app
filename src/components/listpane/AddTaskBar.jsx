@@ -9,6 +9,8 @@ import {
   Typography,
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import { addTask } from '../../redux/actions/tasksActions';
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
-    marginRight: 10
+    marginRight: 10,
   },
   form: {
     margin: theme.spacing(1),
@@ -30,11 +32,31 @@ const useStyles = makeStyles((theme) => ({
   input: {
     marginLeft: 5,
     marginRight: 5,
-  }, 
+  },
 }));
 
-export default function AddTaskBar() {
+const mapDispatchToProps = (dispatch) => ({
+  addTask: task => dispatch(addTask(task))
+});
+
+function AddTaskBar({ addTask }) {
   const classes = useStyles();
+  const [ name, setName ] = React.useState('');
+  const [ start, setStart ] = React.useState('');
+  const [ due, setDue ] = React.useState('');
+  const [ priority, setPriority ] = React.useState(0);
+  const taskifyAndAdd = () => {
+    let task = {
+      name,
+      start,
+      due,
+      priority
+    }
+    console.log(task);
+    addTask(task);
+    return task;
+  };
+
   return (
     <div className={classes.root}>
       <AppBar position="static" color="sceondary">
@@ -42,34 +64,38 @@ export default function AddTaskBar() {
         <Toolbar variant="dense">
           <form className={classes.form}>
             <TextField
-              id=""
+              id="name-input"
               className={classes.input}
               variant="outlined"
               label="Name"
               size="small"
               required
+              onChange={event => setName(event.target.value)}
             />
             <TextField
-              id=""
+              id="start-input"
               className={classes.input}
               variant="outlined"
               label="Start"
               size="small"
+              onChange={event => setStart(event.target.value)}
             />
             <TextField
-              id=""
+              id="due-input"
               className={classes.input}
               variant="outlined"
               label="Due"
               size="small"
+              onChange={event => setDue(event.target.value)}
             />
             <TextField
-              id=""
+              id="priority-input"
               className={classes.input}
               variant="outlined"
               label="Priority"
               size="small"
               required
+              onChange={event => setPriority(event.target.value)}
             />
           </form>
           <Typography variant="h6" className={classes.title}>
@@ -80,6 +106,7 @@ export default function AddTaskBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="add task"
+            onClick={taskifyAndAdd}
           >
             <AddIcon />
           </IconButton>
@@ -88,3 +115,5 @@ export default function AddTaskBar() {
     </div>
   );
 }
+
+export default connect(null, mapDispatchToProps)(AddTaskBar);
