@@ -18,18 +18,50 @@ export const fetchTasks = () => (dispatch) => {
     .catch((err) => console.log(err)); // Firefox network error?
 };
 
-// export const deleteTask = (id) => (dispatch) => {
-//   let url = `/api/v1/${id}`;
-//   fetch(url, {
-//     method: "DELETE",
-//   })
-//     .then((res) => res.json())
-//     .then(res => {
-//       let task = res.data
+export const updateTask = ({
+  id,
+  name,
+  start,
+  due,
+  priority,
+  description,
+  completed,
+  tag,
+}) => (dispatch) => {
+  let url = `/api/v1/tasks/${id}`;
+  let data = {
+    mathod: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name,
+      start,
+      due,
+      priority,
+      description,
+      completed,
+      tag,
+    }),
+  };
 
-//     })
-//     .catch((err) => console.log(err));
-// };
+  fetch();
+};
+
+export const deleteTask = (id) => (dispatch) => {
+  let url = `/api/v1/tasks/${id}`;
+  fetch(url, {
+    method: "DELETE",
+  })
+    .then((res) => res.json())
+    .then((res) =>
+      dispatch({
+        type: types.DELETE_TASK,
+        payload: id,
+      })
+    )
+    .catch((err) => console.log(err));
+};
 
 export const addTask = ({ name, start, due, priority, description, tag }) => (
   dispatch
@@ -41,12 +73,13 @@ export const addTask = ({ name, start, due, priority, description, tag }) => (
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      name: name,
-      start: start,
-      due: due,
-      priority: priority,
-      description: description,
-      tag: tag,
+      name,
+      start,
+      due,
+      priority,
+      description,
+      tag,
+      completed: false,
     }),
   };
   fetch(url, data)
