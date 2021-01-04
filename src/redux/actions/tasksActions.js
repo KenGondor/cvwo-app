@@ -15,7 +15,7 @@ export const fetchTasks = () => (dispatch) => {
         payload: res.data.map((task) => task.attributes),
       })
     )
-    .catch((err) => console.log(err)); // Firefox network error?
+    .catch((err) => console.log(err)); // Firefox network error when fetching from jsonapiplaceholder/todos
 };
 
 export const updateTask = ({
@@ -45,7 +45,14 @@ export const updateTask = ({
     }),
   };
 
-  fetch();
+  fetch(url, data)
+    .then((res) => res.json())
+    .then((res) =>
+      dispatch({
+        type: types.UPDATE_TASK,
+        payload: res.data.attributes
+      })
+    );
 };
 
 export const deleteTask = (id) => (dispatch) => {

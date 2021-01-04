@@ -16,7 +16,11 @@ export default function tasksReducer(state = [], action) {
 
     case UPDATE_TASK:
       return state.map(task => {
-        if task.id === action.payload.id
+        if (task.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return task;
+        }
       });
     default:
       return state;
