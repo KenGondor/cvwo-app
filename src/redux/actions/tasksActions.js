@@ -33,6 +33,23 @@ export const updateTask = (task) => (dispatch) => {
     );
 };
 
+export const toggleCompletionStateOfTask = ({id, completed}) => dispatch => { // Not the most graceful
+  let url = `/api/v1/tasks/${id}`;
+  let data = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ id, completed })
+  };
+
+  fetch(url, data)
+  dispatch({
+    type: types.UPDATE_COMPLETETION,
+    payload: { id, completed }
+  })
+};
+
 export const deleteTask = (id) => (dispatch) => {
   let url = `/api/v1/tasks/${id}`;
   fetch(url, {

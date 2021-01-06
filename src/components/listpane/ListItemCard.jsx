@@ -6,7 +6,7 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import { updateTask } from '../../redux/actions/tasksActions';
+import { toggleCompletionStateOfTask } from '../../redux/actions/tasksActions';
 import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,18 +26,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const mapDispatchToProps = (dispatch) => ({
-  updateTask: task => dispatch(updateTask(task))
+  toggleCompletionStateOfTask: task => dispatch(toggleCompletionStateOfTask(task))
 });
 
-function ListItemCard({ task , updateTask }) {
+function ListItemCard({ task , toggleCompletionStateOfTask }) {
   const classes = useStyles();
   const handleChange = () => {
     let updatedTask = {
       ...task,
       completed: !task.completed
     };
-
-    updateTask(updatedTask);
+    toggleCompletionStateOfTask(updatedTask);
   };
 
   return (
