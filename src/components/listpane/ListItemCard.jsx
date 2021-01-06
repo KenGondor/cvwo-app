@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
   typographyStyles: {
     flex: 1,
     alignSelf: 'center',
-    paddingLeft: '2%'
+    paddingLeft: '2%',
+    fontSize: 16
   }
 }));
 
@@ -40,12 +41,12 @@ function ListItemCard({ task , toggleCompletionStateOfTask }) {
   };
 
   return (
-    <Paper className={classes.root}>
+    <Paper className={classes.root} elevation='0'>
       <Typography className={classes.typographyStyles} noWrap variant='h6'>
         {task.name}
       </Typography>
       <IconButton className={classes.checkBox}>
-        <Checkbox checked={task.completed} onChange={handleChange}/>
+        <Checkbox checked={task.completed} onChange={handleChange} color='primary'/>
       </IconButton>
     </Paper>
   );

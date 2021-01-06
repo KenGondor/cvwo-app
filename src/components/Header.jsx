@@ -7,7 +7,8 @@ const useStyles = makeStyles({
     bar: {
         position: 'relative',
         zIndex: 1201,
-        borderRadius: 10,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10
     },
     typo: {
         flex: 1.
