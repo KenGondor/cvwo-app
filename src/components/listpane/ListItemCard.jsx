@@ -6,6 +6,8 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
+import { updateTask } from '../../redux/actions/tasksActions';
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,20 +25,31 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ListItemCard({ id, name, due, completed}) {
+const mapDispatchToProps = (dispatch) => ({
+  updateTask: task => dispatch(updateTask(task))
+});
+
+function ListItemCard({ task , updateTask }) {
   const classes = useStyles();
   const handleChange = () => {
-      
+    let updatedTask = {
+      ...task,
+      completed: !task.completed
+    };
+
+    updateTask(updatedTask);
   };
 
   return (
     <Paper className={classes.root}>
       <Typography className={classes.typographyStyles} noWrap variant='h6'>
-        {name}
+        {task.name}
       </Typography>
       <IconButton className={classes.checkBox}>
-        <Checkbox checked={completed} onChange={handleChange}/>
+        <Checkbox checked={task.completed} onChange={handleChange}/>
       </IconButton>
     </Paper>
   );
 }
+
+export default connect(null, mapDispatchToProps)(ListItemCard);

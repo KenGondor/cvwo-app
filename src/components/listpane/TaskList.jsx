@@ -1,12 +1,7 @@
-import {
-  List,
-  ListItem,
-  makeStyles,
-} from "@material-ui/core";
+import { List, ListItem, makeStyles } from "@material-ui/core";
 import React from "react";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import ListItemCard from "./ListItemCard";
-import { fetchTasks } from '../../redux/actions/tasksActions';
 
 const useStyles = makeStyles({
   list: {
@@ -16,8 +11,8 @@ const useStyles = makeStyles({
   },
 });
 
-const mapStateToProps = state => ({
-  tasks: state.tasks
+const mapStateToProps = (state) => ({
+  tasks: state.tasks,
 });
 
 function TaskList({ tasks }) {
@@ -27,7 +22,7 @@ function TaskList({ tasks }) {
     <List className={classes.list}>
       {tasks.map((task) => (
         <ListItem key={task.id}>
-          <ListItemCard {...task} />
+          <ListItemCard task={task} />
         </ListItem>
       ))}
     </List>

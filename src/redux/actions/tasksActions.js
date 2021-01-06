@@ -1,10 +1,5 @@
 import * as types from "./actionTypes";
 
-const fetchTasksThunk = (tasks) => ({
-  type: types.FETCH_TASKS,
-  payload: tasks,
-});
-
 export const fetchTasks = () => (dispatch) => {
   console.log("fetching");
   fetch("/api/v1/tasks")
@@ -18,31 +13,14 @@ export const fetchTasks = () => (dispatch) => {
     .catch((err) => console.log(err)); // Firefox network error when fetching from jsonapiplaceholder/todos
 };
 
-export const updateTask = ({
-  id,
-  name,
-  start,
-  due,
-  priority,
-  description,
-  completed,
-  tag,
-}) => (dispatch) => {
-  let url = `/api/v1/tasks/${id}`;
+export const updateTask = (task) => (dispatch) => {
+  let url = `/api/v1/tasks/${task.id}`;
   let data = {
-    mathod: "PUT",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      name,
-      start,
-      due,
-      priority,
-      description,
-      completed,
-      tag,
-    }),
+    body: JSON.stringify(task),
   };
 
   fetch(url, data)
