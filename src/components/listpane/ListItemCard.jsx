@@ -13,10 +13,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     height: 40,
-    display: 'flex'
-  },
-  checkBox: {
-
+    display: 'flex',
   },
   typographyStyles: {
     flex: 1,
@@ -45,7 +42,7 @@ function ListItemCard({ task , toggleCompletionStateOfTask }) {
       <Typography className={classes.typographyStyles} noWrap variant='h6'>
         {task.name}
       </Typography>
-      <IconButton className={classes.checkBox}>
+      <IconButton>
         <Checkbox checked={task.completed} onChange={handleChange} color='primary'/>
       </IconButton>
     </Paper>

@@ -9,8 +9,10 @@ import {
   Typography,
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
-import { addTask } from '../../redux/actions/tasksActions';
+import { addTask } from "../../redux/actions/tasksActions";
 import { connect } from "react-redux";
+import { Autocomplete } from "@material-ui/lab";
+import { createTags } from "../../utils/utils";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,25 +37,36 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const mapDispatchToProps = (dispatch) => ({
-  addTask: task => dispatch(addTask(task))
+const mapStateToProps = (state) => ({
+  tags: createTags(state.tasks),
 });
 
-function AddTaskBar({ addTask }) {
+const mapDispatchToProps = (dispatch) => ({
+  addTask: (task) => dispatch(addTask(task)),
+});
+
+function AddTaskBar({ tags, addTask }) {
   const classes = useStyles();
-  const [ name, setName ] = React.useState('');
-  const [ start, setStart ] = React.useState('');
-  const [ due, setDue ] = React.useState('');
-  const [ priority, setPriority ] = React.useState(0);
+  const [name, setName] = React.useState("");
+  const [start, setStart] = React.useState("");
+  const [due, setDue] = React.useState("");
+  const [priority, setPriority] = React.useState("");
+  const [tag, setTag] = React.useState(null);
   const taskifyAndAdd = () => {
     let task = {
       name,
       start,
       due,
-      priority
-    }
+      priority,
+      tag,
+    };
     console.log(task);
     addTask(task);
+    setName("");
+    setStart("");
+    setDue("");
+    setPriority(0);
+    setTag(null);
     return task;
   };
 
@@ -70,7 +83,8 @@ function AddTaskBar({ addTask }) {
               label="Name"
               size="small"
               required
-              onChange={event => setName(event.target.value)}
+              value={name}
+              onChange={(event) => setName(event.target.value)}
             />
             <TextField
               id="start-input"
@@ -78,7 +92,8 @@ function AddTaskBar({ addTask }) {
               variant="outlined"
               label="Start"
               size="small"
-              onChange={event => setStart(event.target.value)}
+              value={start}
+              onChange={(event) => setStart(event.target.value)}
             />
             <TextField
               id="due-input"
@@ -86,7 +101,8 @@ function AddTaskBar({ addTask }) {
               variant="outlined"
               label="Due"
               size="small"
-              onChange={event => setDue(event.target.value)}
+              value={due}
+              onChange={(event) => setDue(event.target.value)}
             />
             <TextField
               id="priority-input"
@@ -95,7 +111,28 @@ function AddTaskBar({ addTask }) {
               label="Priority"
               size="small"
               required
-              onChange={event => setPriority(event.target.value)}
+              value={priority}
+              onChange={(event) => setPriority(event.target.value)}
+            />
+            <Autocomplete
+              style={{ width: "20%" }}
+              options={tags}
+              freeSolo
+              onChange={(event, value) => {
+                setTag(value);
+              }}
+              getOptionLabel={(option) => option}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  className={classes.input}
+                  variant="outlined"
+                  label='Tag'
+                  size="small"
+                  value={tag}
+                  onChange={event => setTag(event.target.value)}
+                />
+              )}
             />
           </form>
           <Typography variant="h6" className={classes.title}>
@@ -116,4 +153,4 @@ function AddTaskBar({ addTask }) {
   );
 }
 
-export default connect(null, mapDispatchToProps)(AddTaskBar);
+export default connect(mapStateToProps, mapDispatchToProps)(AddTaskBar);

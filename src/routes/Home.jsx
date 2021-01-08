@@ -11,6 +11,7 @@ const useStyles = makeStyles({
     height: "100vh",
     // backgroundImage: `url(${Image})`,
     backgroundSize: "cover",
+    minWidth: 1000
   },
   viewbox: {
     backgroundColor: "#FFFFFF",

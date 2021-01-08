@@ -1,51 +1,90 @@
 import {
-  Grid,
   List,
   ListItem,
   makeStyles,
-  Typography,
-  Paper,
+  ListSubheader,
+  ListItemIcon,
+  ListItemText,
+  Collapse,
 } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
+import InboxIcon from "@material-ui/icons/Inbox";
+import TodayIcon from '@material-ui/icons/Today';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import { createTags } from '../utils/utils';
 
 const mapStateToProps = (state) => ({
-  tags: Array.from(new Set(state.tasks.map((task) => task.tag))),
+  tags: createTags(state.tasks)
 });
 
 const useStyles = makeStyles((theme) => ({
   sidebar: {
-    backgroundColor: "blue",
+    width: "100%",
   },
-  tagList: {
-    overflow: "auto",
-  },
-  tag: {
-    width: '100%'
+  nested: {
+    paddingLeft: theme.spacing(3),
   }
 }));
 
 function Sidebar({ tags }) {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+  const handleClick = () => {
+    setOpen(!open);
+  };
+  const showAllTasks = (t) => {
+    alert(t);
+  };
+  const showTodayTasks = () => {
+    alert('Today\' tasks');
+  };
+
   return (
-    <Grid container direction="column" className={classes.sidebar}>
-      <Grid item>
-        <Paper>
-          <Typography>All tasks</Typography>
-        </Paper>
-      </Grid>
-      <Grid item>
-        <List className={classes.tagList}>
-          {tags.map((tag) => (
-            <ListItem key={tag}>
-              <Paper className={classes.tag}>
-                <Typography>{tag}</Typography>
-              </Paper>
+    <List
+      component="sidebar"
+      subheader={
+        <ListSubheader component="div" id="list-subheader">
+          Categories
+        </ListSubheader>
+      }
+      className={classes.sidebar}
+    >
+      <ListItem button onClick={() => showAllTasks('fefefe')}>
+        <ListItemIcon>
+          <InboxIcon />
+        </ListItemIcon>
+        <ListItemText primary="All Tasks" />
+      </ListItem>
+      <ListItem button onClick={showTodayTasks}>
+        <ListItemIcon>
+          <TodayIcon />
+        </ListItemIcon>
+        <ListItemText primary='Today '/>
+      </ListItem>
+      <ListItem button onClick={handleClick}>
+        <ListItemIcon>
+          <MoreHorizIcon />
+        </ListItemIcon>
+        <ListItemText primary='Tags' />
+        {open ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={open} timeout='auto' unmountOnExit>
+        <List component='div' disablePadding>
+          {tags.map(tag => (
+            <ListItem button className={classes.nested}>
+              <ListItemIcon>
+                <RadioButtonUncheckedIcon />
+              </ListItemIcon>
+              <ListItemText primary={tag} />
             </ListItem>
           ))}
         </List>
-      </Grid>
-    </Grid>
+      </Collapse>
+    </List>
   );
 }
 
