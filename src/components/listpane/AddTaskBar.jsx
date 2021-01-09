@@ -12,7 +12,7 @@ import AddIcon from "@material-ui/icons/Add";
 import { addTask } from "../../redux/actions/tasksActions";
 import { connect } from "react-redux";
 import { Autocomplete } from "@material-ui/lab";
-import { createTags } from "../../utils/utils";
+import { createTags, acceptInput } from "../../utils/utils";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,10 +54,10 @@ function AddTaskBar({ tags, addTask }) {
   const [tag, setTag] = React.useState(null);
   const taskifyAndAdd = () => {
     let task = {
-      name,
-      start,
-      due,
-      priority,
+      name: name.trim(),
+      start: start.trim(),
+      due: due.trim(),
+      priority: priority.trim(),
       tag,
     };
     console.log(task);
@@ -65,7 +65,7 @@ function AddTaskBar({ tags, addTask }) {
     setName("");
     setStart("");
     setDue("");
-    setPriority(0);
+    setPriority("");
     setTag(null);
     return task;
   };
@@ -84,7 +84,7 @@ function AddTaskBar({ tags, addTask }) {
               size="small"
               required
               value={name}
-              onChange={(event) => setName(event.target.value)}
+              onChange={(event) => acceptInput(setName, event)}
             />
             <TextField
               id="start-input"
@@ -93,7 +93,7 @@ function AddTaskBar({ tags, addTask }) {
               label="Start"
               size="small"
               value={start}
-              onChange={(event) => setStart(event.target.value)}
+              onChange={(event) => acceptInput(setStart, event)}
             />
             <TextField
               id="due-input"
@@ -102,7 +102,7 @@ function AddTaskBar({ tags, addTask }) {
               label="Due"
               size="small"
               value={due}
-              onChange={(event) => setDue(event.target.value)}
+              onChange={(event) => acceptInput(setDue, event)}
             />
             <TextField
               id="priority-input"
@@ -112,7 +112,7 @@ function AddTaskBar({ tags, addTask }) {
               size="small"
               required
               value={priority}
-              onChange={(event) => setPriority(event.target.value)}
+              onChange={(event) => acceptInput(setPriority, event)}
             />
             <Autocomplete
               style={{ width: "20%" }}
@@ -122,6 +122,7 @@ function AddTaskBar({ tags, addTask }) {
                 setTag(value);
               }}
               getOptionLabel={(option) => option}
+              value={tag}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -129,8 +130,7 @@ function AddTaskBar({ tags, addTask }) {
                   variant="outlined"
                   label='Tag'
                   size="small"
-                  value={tag}
-                  onChange={event => setTag(event.target.value)}
+                  onChange={event => acceptInput(setTag, event)}
                 />
               )}
             />

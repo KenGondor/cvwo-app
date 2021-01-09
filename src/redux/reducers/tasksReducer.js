@@ -7,7 +7,6 @@ import {
 } from "../actions/actionTypes";
 
 export default function tasksReducer(state = [], action) {
-  console.log(action.type);
   switch (action.type) {
     case FETCH_TASKS:
       console.log("fetching tasks");
@@ -40,6 +39,7 @@ export default function tasksReducer(state = [], action) {
           return task;
         }
       })
+      
     default:
       return state;
   }

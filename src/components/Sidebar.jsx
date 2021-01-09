@@ -36,11 +36,11 @@ function Sidebar({ tags }) {
   const handleClick = () => {
     setOpen(!open);
   };
-  const showAllTasks = (t) => {
-    alert(t);
+  const showAllTasks = () => {
+
   };
   const showTodayTasks = () => {
-    alert('Today\' tasks');
+    
   };
 
   return (

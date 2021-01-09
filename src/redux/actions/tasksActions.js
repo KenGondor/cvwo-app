@@ -28,26 +28,29 @@ export const updateTask = (task) => (dispatch) => {
     .then((res) =>
       dispatch({
         type: types.UPDATE_TASK,
-        payload: res.data.attributes
+        payload: res.data.attributes,
       })
     );
 };
 
-export const toggleCompletionStateOfTask = ({id, completed}) => dispatch => { // Not the most graceful
+export const toggleCompletionStateOfTask = ({ id, completed }) => (
+  dispatch
+) => {
+  // Not the most graceful
   let url = `/api/v1/tasks/${id}`;
   let data = {
     method: "PUT",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify({ id, completed })
+    body: JSON.stringify({ id, completed }),
   };
 
-  fetch(url, data)
+  fetch(url, data);
   dispatch({
     type: types.UPDATE_COMPLETETION,
-    payload: { id, completed }
-  })
+    payload: { id, completed },
+  });
 };
 
 export const deleteTask = (id) => (dispatch) => {
@@ -64,6 +67,8 @@ export const deleteTask = (id) => (dispatch) => {
     )
     .catch((err) => console.log(err));
 };
+
+export const updateVisibilityFilter = () => (dispatch) => {};
 
 export const addTask = ({ name, start, due, priority, description, tag }) => (
   dispatch
