@@ -2,10 +2,11 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './redux/reducers';
+import { ALL_TASK } from './utils/filterConstants';
 
 const initialState = {
     tasks: [],
-    visibilityFilter: ''
+    visibilityFilter: ALL_TASK // default view
 };
 
 // middleware for asynchronous dispatches

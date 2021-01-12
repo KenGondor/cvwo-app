@@ -1,4 +1,5 @@
-export const ALL_TASK = 'ALL_TASKS';
-export const TODAY = 'TODAY';
-export const TOMORROW = 'TMR';
-export const OVERDUE = 'OVERDUE';
+export const ALL_TASK = 'ALL_TASKS99';
+export const TODAY = 'TODAY99';
+export const TOMORROW = 'TMR99';
+export const OVERDUE = 'OVERDUE99';
+export const COMPLETED = 'COMPLETED99';
