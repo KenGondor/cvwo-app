@@ -15,6 +15,7 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
+import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import { createTags } from "../utils/utils";
 import { ALL_TASK, COMPLETED, TODAY } from "../utils/filterConstants";
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 const mapStateToProps = (state) => ({
   tags: createTags(state.tasks),
+  currentFilter: state.visibilityFilter,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -38,7 +40,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(setVisibilityFilter(filteringTag)),
 });
 
-function Sidebar({ tags, setVisibilityFilter }) {
+function Sidebar({ tags, currentFilter, setVisibilityFilter }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleClick = () => {
@@ -55,6 +57,9 @@ function Sidebar({ tags, setVisibilityFilter }) {
   };
   const showCustomTag = (tag) => {
     setVisibilityFilter(tag);
+  };
+  const isShowingTag = (tag) => {
+    return currentFilter === tag;
   };
 
   return (
@@ -91,7 +96,7 @@ function Sidebar({ tags, setVisibilityFilter }) {
           {tags.map((tag) => (
             <ListItem button className={classes.nested} onClick={() => showCustomTag(tag)}>
               <ListItemIcon>
-                <RadioButtonUncheckedIcon />
+                {isShowingTag(tag) ? <RadioButtonCheckedIcon /> : <RadioButtonUncheckedIcon />}
               </ListItemIcon>
               <ListItemText primary={tag} />
             </ListItem>
