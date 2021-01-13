@@ -15,7 +15,7 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
-import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
+import RadioButtonCheckedIcon from "@material-ui/icons/RadioButtonChecked";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import { createTags } from "../utils/utils";
 import { ALL_TASK, COMPLETED, TODAY } from "../utils/filterConstants";
@@ -41,7 +41,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 function Sidebar({ tags, currentFilter, setVisibilityFilter }) {
-  const classes = useStyles();
+  const classes = useStyles(currentFilter);
   const [open, setOpen] = React.useState(false);
   const handleClick = () => {
     setOpen(!open);
@@ -72,13 +72,21 @@ function Sidebar({ tags, currentFilter, setVisibilityFilter }) {
       }
       className={classes.sidebar}
     >
-      <ListItem button onClick={() => showAllTasks("fefefe")}>
+      <ListItem
+        button
+        onClick={showAllTasks}
+        style={{ backgroundColor: isShowingTag(ALL_TASK) ? "#DCDCDC" : "#FFF" }}
+      >
         <ListItemIcon>
           <InboxIcon />
         </ListItemIcon>
         <ListItemText primary="All Tasks" />
       </ListItem>
-      <ListItem button onClick={showTodayTasks}>
+      <ListItem
+        button
+        onClick={showTodayTasks}
+        style={{ backgroundColor: isShowingTag(TODAY) ? "#DCDCDC" : "#FFF" }}
+      >
         <ListItemIcon>
           <TodayIcon />
         </ListItemIcon>
@@ -94,16 +102,30 @@ function Sidebar({ tags, currentFilter, setVisibilityFilter }) {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           {tags.map((tag) => (
-            <ListItem button className={classes.nested} onClick={() => showCustomTag(tag)}>
+            <ListItem
+              button
+              className={classes.nested}
+              onClick={() => showCustomTag(tag)}
+            >
               <ListItemIcon>
-                {isShowingTag(tag) ? <RadioButtonCheckedIcon /> : <RadioButtonUncheckedIcon />}
+                {isShowingTag(tag) ? (
+                  <RadioButtonCheckedIcon />
+                ) : (
+                  <RadioButtonUncheckedIcon />
+                )}
               </ListItemIcon>
               <ListItemText primary={tag} />
             </ListItem>
           ))}
         </List>
       </Collapse>
-      <ListItem button onClick={showCompleted}>
+      <ListItem
+        button
+        onClick={showCompleted}
+        style={{
+          backgroundColor: isShowingTag(COMPLETED) ? "#DCDCDC" : "#FFF",
+        }}
+      >
         <ListItemIcon>
           <AssignmentTurnedInIcon />
         </ListItemIcon>

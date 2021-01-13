@@ -1,8 +1,8 @@
-import { List, ListItem, makeStyles } from "@material-ui/core";
+import { List, makeStyles } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
 import ListItemCard from "./ListItemCard";
-import { taskVisibilityFilter } from '../../utils/utils';
+import { taskVisibilityFilter } from "../../utils/utils";
 
 const useStyles = makeStyles({
   list: {
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 
 const mapStateToProps = (state) => ({
   tasks: state.tasks,
-  visibilityFilter: state.visibilityFilter
+  visibilityFilter: state.visibilityFilter,
 });
 
 function TaskList({ tasks, visibilityFilter }) {
@@ -23,9 +23,7 @@ function TaskList({ tasks, visibilityFilter }) {
   return (
     <List className={classes.list}>
       {taskVisibilityFilter(visibilityFilter, tasks).map((task) => (
-        <ListItem key={task.id}>
-          <ListItemCard task={task} />
-        </ListItem>
+        <ListItemCard task={task} />
       ))}
     </List>
   );

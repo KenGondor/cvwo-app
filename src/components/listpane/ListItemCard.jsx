@@ -4,48 +4,55 @@ import {
   Checkbox,
   IconButton,
   makeStyles,
-  Typography,
+  ListItem,
+  ListItemText,
 } from "@material-ui/core";
-import { toggleCompletionStateOfTask } from '../../redux/actions/tasksActions';
+import { toggleCompletionStateOfTask } from "../../redux/actions/tasksActions";
 import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     height: 40,
-    display: 'flex',
+    display: "flex",
   },
   typographyStyles: {
-    flex: 1,
-    alignSelf: 'center',
-    paddingLeft: '2%',
-    fontSize: 16
-  }
+    alignSelf: "center",
+    paddingLeft: "2%",
+  },
 }));
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleCompletionStateOfTask: task => dispatch(toggleCompletionStateOfTask(task))
+  toggleCompletionStateOfTask: (task) =>
+    dispatch(toggleCompletionStateOfTask(task)),
 });
 
-function ListItemCard({ task , toggleCompletionStateOfTask }) {
+function ListItemCard({ task, toggleCompletionStateOfTask }) {
   const classes = useStyles();
   const handleChange = () => {
     let updatedTask = {
       ...task,
-      completed: !task.completed
+      completed: !task.completed,
     };
     toggleCompletionStateOfTask(updatedTask);
   };
+  const showTask = () => {
+
+  };
 
   return (
-    <Paper className={classes.root} elevation='0'>
-      <Typography className={classes.typographyStyles} noWrap variant='h6'>
-        {task.name}
-      </Typography>
-      <IconButton>
-        <Checkbox checked={task.completed} onChange={handleChange} color='primary'/>
-      </IconButton>
-    </Paper>
+    <ListItem key={task.id} button onCLick={showTask}>
+      <Paper className={classes.root} elevation="0">
+        <ListItemText primary={task.name} className={classes.typographyStyles}/>
+        <IconButton>
+          <Checkbox
+            checked={task.completed}
+            onChange={handleChange}
+            color="primary"
+          />
+        </IconButton>
+      </Paper>
+    </ListItem>
   );
 }
 
