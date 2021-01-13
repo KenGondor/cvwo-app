@@ -89,9 +89,6 @@ function Header({ tasks, setFilterToOverdue }) {
       alert(searchValue); // TODO::
     }
   };
-  const viewOverdueTasks = () => {
-    setFilterToOverdue();
-  };
 
   return (
     <AppBar className={classes.bar}>
@@ -116,7 +113,7 @@ function Header({ tasks, setFilterToOverdue }) {
           />
         </div>
         <Tooltip title={"Overdue Tasks"}>
-          <IconButton onClick={viewOverdueTasks}>
+          <IconButton onClick={setFilterToOverdue}>
             <Badge badgeContent={getNumberOfOverdueTask(tasks)} color="error">
               <AssignmentLateIcon />
             </Badge>

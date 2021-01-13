@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Paper,
   Checkbox,
   IconButton,
   makeStyles,
@@ -13,8 +12,7 @@ import { connect } from "react-redux";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    height: 40,
-    display: "flex",
+    height: 50
   },
   typographyStyles: {
     alignSelf: "center",
@@ -41,8 +39,7 @@ function ListItemCard({ task, toggleCompletionStateOfTask }) {
   };
 
   return (
-    <ListItem key={task.id} button onCLick={showTask}>
-      <Paper className={classes.root} elevation="0">
+    <ListItem key={task.id} button onCLick={showTask} className={classes.root}>
         <ListItemText primary={task.name} className={classes.typographyStyles}/>
         <IconButton>
           <Checkbox
@@ -51,7 +48,6 @@ function ListItemCard({ task, toggleCompletionStateOfTask }) {
             color="primary"
           />
         </IconButton>
-      </Paper>
     </ListItem>
   );
 }
