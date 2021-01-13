@@ -1,3 +1,5 @@
+import React from "react";
+import { connect } from "react-redux";
 import {
   List,
   ListItem,
@@ -7,8 +9,6 @@ import {
   ListItemText,
   Collapse,
 } from "@material-ui/core";
-import React from "react";
-import { connect } from "react-redux";
 import InboxIcon from "@material-ui/icons/Inbox";
 import TodayIcon from "@material-ui/icons/Today";
 import ExpandLess from "@material-ui/icons/ExpandLess";
@@ -19,7 +19,7 @@ import RadioButtonCheckedIcon from "@material-ui/icons/RadioButtonChecked";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import { createTags } from "../utils/utils";
 import { ALL_TASK, COMPLETED, TODAY } from "../utils/filterConstants";
-import { setVisibilityFilter } from "../redux/actions/visibilityFilterActions";
+import setVisibilityFilter from "../redux/actions/visibilityFilterActions";
 
 const useStyles = makeStyles((theme) => ({
   sidebar: {

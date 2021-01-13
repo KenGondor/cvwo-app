@@ -128,15 +128,15 @@ function AddTaskBar({ tags, addTask }) {
                   {...params}
                   className={classes.input}
                   variant="outlined"
-                  label='Tag'
+                  label="Tag"
                   size="small"
-                  onChange={event => acceptInput(setTag, event)}
+                  onChange={(event) => acceptInput(setTag, event)}
                 />
               )}
             />
           </form>
           <Typography variant="h6" className={classes.title}>
-            Add Task
+            Add
           </Typography>
           <IconButton
             edge="start"

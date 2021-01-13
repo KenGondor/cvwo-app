@@ -1,4 +1,4 @@
-import { ALL_TASK, TODAY, COMPLETED } from "./filterConstants";
+import { ALL_TASK, TODAY, COMPLETED, OVERDUE } from "./filterConstants";
 
 export const removeUntagged = (arr) => {
   return arr.filter((elem) => elem !== null && elem.length !== 0);
@@ -13,7 +13,17 @@ export const acceptInput = (func, event) => {
 };
 
 const filterDueTodayTask = (tasks) => {
-  return tasks; // TODO
+  return tasks; // TODO::
+};
+
+export const filterOverdueTask = (tasks) => {
+  return filterIncompleteTask(tasks).filter(
+    (task) => new Date(task.due) < Date.now()
+  );
+};
+
+export const getNumberOfOverdueTask = (tasks) => {
+  return filterOverdueTask(tasks).length;
 };
 
 const filterCompletedTask = (tasks) => tasks.filter((task) => task.completed);
@@ -31,6 +41,9 @@ export const taskVisibilityFilter = (visibilityFilter, tasks) => {
 
     case COMPLETED:
       return filterCompletedTask(tasks);
+
+    case OVERDUE:
+      return filterOverdueTask(tasks);
 
     default:
       return tasks.filter((task) => task.tag === visibilityFilter);
