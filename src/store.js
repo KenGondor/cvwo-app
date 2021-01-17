@@ -6,7 +6,8 @@ import { ALL_TASK } from './utils/filterConstants';
 
 const initialState = {
     tasks: [],
-    visibilityFilter: ALL_TASK // default view
+    visibilityFilter: ALL_TASK, // default view
+    searchWord: '',
 };
 
 // middleware for asynchronous dispatches

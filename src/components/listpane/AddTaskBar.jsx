@@ -12,18 +12,18 @@ import AddIcon from "@material-ui/icons/Add";
 import { addTask } from "../../redux/actions/tasksActions";
 import { connect } from "react-redux";
 import { Autocomplete } from "@material-ui/lab";
-import { createTags, acceptInput } from "../../utils/utils";
+import { createTags, acceptInput, isDate } from "../../utils/utils";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     borderRadius: 5,
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
+  addButton: {
+    marginLeft: theme.spacing(1),
   },
   title: {
-    marginRight: 10,
+    marginLeft: 20,
   },
   form: {
     margin: theme.spacing(1),
@@ -52,6 +52,19 @@ function AddTaskBar({ tags, addTask }) {
   const [due, setDue] = React.useState("");
   const [priority, setPriority] = React.useState("");
   const [tag, setTag] = React.useState(null);
+  const [dateErrorState, setDateErrorState] = React.useState(false);
+  const getHelperText = () => {
+    return dateErrorState ? 'Invalid Date: yyyy-MM-dd' : '';
+  };
+  const [taskIsCorrect, setTaskIsCorrect] = React.useState(true);
+  const validateDateAndWrite = (func, event) => {
+    func(event.target.value)
+    if (event.target.value.length === 0 || isDate(event.target.value)) {
+      setDateErrorState(false);
+    } else {
+      setDateErrorState(true);
+    }
+  };
   const taskifyAndAdd = () => {
     let task = {
       name: name.trim(),
@@ -67,6 +80,7 @@ function AddTaskBar({ tags, addTask }) {
     setDue("");
     setPriority("");
     setTag(null);
+    setDateErrorState(false);
     return task;
   };
 
@@ -102,7 +116,9 @@ function AddTaskBar({ tags, addTask }) {
               label="Due"
               size="small"
               value={due}
-              onChange={(event) => acceptInput(setDue, event)}
+              onChange={(event) => validateDateAndWrite(setDue, event)}
+              helperText={getHelperText()}
+              error={dateErrorState}
             />
             <TextField
               id="priority-input"
@@ -140,7 +156,7 @@ function AddTaskBar({ tags, addTask }) {
           </Typography>
           <IconButton
             edge="start"
-            className={classes.menuButton}
+            className={classes.addButton}
             color="inherit"
             aria-label="add task"
             onClick={taskifyAndAdd}

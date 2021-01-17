@@ -14,9 +14,10 @@ import {
 import PetsTwoTone from "@material-ui/icons/PetsTwoTone";
 import SearchIcon from "@material-ui/icons/Search";
 import AssignmentLateIcon from "@material-ui/icons/AssignmentLate";
-import { getNumberOfOverdueTask } from '../utils/utils';
-import setVisibilityFilter from '../redux/actions/visibilityFilterActions';
-import { OVERDUE } from '../utils/filterConstants';
+import { getNumberOfOverdueTask } from "../utils/utils";
+import setVisibilityFilter from "../redux/actions/visibilityFilterActions";
+import setSearchWord from "../redux/actions/searchWordAction";
+import { OVERDUE, CUSTOM } from "../utils/filterConstants";
 
 const useStyles = makeStyles((theme) => ({
   flexTen: {
@@ -74,11 +75,15 @@ const mapStateToProps = (state) => ({
   tasks: state.tasks,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   setFilterToOverdue: () => dispatch(setVisibilityFilter(OVERDUE)),
+  setFilterToCustomSearchValue: (value) => {
+    dispatch(setVisibilityFilter(CUSTOM));
+    dispatch(setSearchWord(value));
+  },
 });
 
-function Header({ tasks, setFilterToOverdue }) {
+function Header({ tasks, setFilterToOverdue, setFilterToCustomSearchValue }) {
   const classes = useStyles();
   const [searchValue, setSearchValue] = React.useState("");
   const handleChange = (event) => {
@@ -86,7 +91,7 @@ function Header({ tasks, setFilterToOverdue }) {
   };
   const search = (event) => {
     if (event.keyCode === 13) {
-      alert(searchValue); // TODO::
+      setFilterToCustomSearchValue(searchValue);
     }
   };
 

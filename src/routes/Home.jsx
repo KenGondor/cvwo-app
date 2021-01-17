@@ -32,10 +32,10 @@ export default function Home() {
       <Grid container>
         <Grid item xs={0} sm={1} />
         <Grid item xs={0} sm={2}><Sidebar /></Grid>
-        <Grid item xs={12} sm={8} className={classes.viewbox}>
+        <Grid item xs={12} sm={7} className={classes.viewbox}>
           <ListPane />
         </Grid>
-        <Grid xs={0} sm={1} />
+        <Grid xs={0} sm={2} />
       </Grid>
     </Grid>
   );

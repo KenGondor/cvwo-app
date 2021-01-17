@@ -32,7 +32,7 @@ function ListItemCard({ task, toggleCompletionStateOfTask }) {
       ...task,
       completed: !task.completed,
     };
-    toggleCompletionStateOfTask(updatedTask);
+    toggleCompletionStateOfTask(updatedTask)
   };
   const showTask = () => {
 
