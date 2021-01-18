@@ -73,7 +73,6 @@ function AddTaskBar({ tags, addTask }) {
       priority: priority.trim(),
       tag,
     };
-    console.log(task);
     addTask(task);
     setName("");
     setStart("");

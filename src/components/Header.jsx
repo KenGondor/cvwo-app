@@ -26,8 +26,6 @@ const useStyles = makeStyles((theme) => ({
   bar: {
     position: "relative",
     zIndex: 1201,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
   },
   typo: {
     paddingLeft: 10,
@@ -68,6 +66,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       width: "20ch",
     },
+  },
+  notification: {
+    backgroundColor: "#f5836c",
+    color: "#FFF",
   },
 }));
 
@@ -119,7 +121,11 @@ function Header({ tasks, setFilterToOverdue, setFilterToCustomSearchValue }) {
         </div>
         <Tooltip title={"Overdue Tasks"}>
           <IconButton onClick={setFilterToOverdue}>
-            <Badge badgeContent={getNumberOfOverdueTask(tasks)} color="error">
+            <Badge
+              badgeContent={getNumberOfOverdueTask(tasks)}
+              color="error"
+              classes={{ colorError: classes.notification }}
+            >
               <AssignmentLateIcon />
             </Badge>
           </IconButton>

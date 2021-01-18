@@ -2,7 +2,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Grid, makeStyles } from "@material-ui/core";
-import Fade from "@material-ui/core/Fade";
+import Grow from "@material-ui/core/Grow";
 import Backdrop from "@material-ui/core/Backdrop";
 import Modal from "@material-ui/core/Modal";
 import Sidebar from "../components/Sidebar.jsx";
@@ -10,12 +10,17 @@ import Header from "../components/Header.jsx";
 import ListPane from "../components/listpane/ListPane";
 import toggleModalView from "../redux/actions/modalOpenAction";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
     // backgroundImage: `url(${Image})`,
     backgroundSize: "cover",
     minWidth: 1000,
+  },
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   viewbox: {
     backgroundColor: "#FFFFFF",
@@ -26,7 +31,13 @@ const useStyles = makeStyles({
   task: {
     backgroundColor: "blue",
   },
-});
+  paper: {
+    backgroundColor: "#FF00FF",
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
 
 const mapStateToProps = (state) => ({
   modalOpen: state.modalOpen,
@@ -59,13 +70,14 @@ function Home({ modalOpen, modalTask, toggleModalView }) {
       <Modal
         open={modalOpen}
         onClose={handleClose}
+        className={classes.modal}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{ timeout: 500 }}
       >
-        <Fade in={modalOpen}>
-          <p>fefe</p>
-        </Fade>
+        <Grow in={modalOpen}>
+          <div className={classes.paper}></div>
+        </Grow>
       </Modal>
     </Grid>
   );
