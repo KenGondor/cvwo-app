@@ -2,11 +2,11 @@ import React from "react";
 import {
   AppBar,
   CssBaseline,
-  IconButton,
   makeStyles,
   TextField,
   Toolbar,
   Typography,
+  Button,
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { addTask } from "../../redux/actions/tasksActions";
@@ -19,11 +19,13 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     borderRadius: 5,
   },
-  addButton: {
-    marginLeft: theme.spacing(1),
+  button: {
+    marginLeft: theme.spacing(2),
+    textTransform: "none",
+    paddingRight: '1%'
   },
-  title: {
-    marginLeft: 20,
+  icon: {
+    marginLeft: 4,
   },
   form: {
     margin: theme.spacing(1),
@@ -54,11 +56,11 @@ function AddTaskBar({ tags, addTask }) {
   const [tag, setTag] = React.useState(null);
   const [dateErrorState, setDateErrorState] = React.useState(false);
   const getHelperText = () => {
-    return dateErrorState ? 'Invalid Date: yyyy-MM-dd' : '';
+    return dateErrorState ? "Invalid Date: yyyy-MM-dd" : "";
   };
   const [taskIsCorrect, setTaskIsCorrect] = React.useState(true);
   const validateDateAndWrite = (func, event) => {
-    func(event.target.value)
+    func(event.target.value);
     if (event.target.value.length === 0 || isDate(event.target.value)) {
       setDateErrorState(false);
     } else {
@@ -150,18 +152,15 @@ function AddTaskBar({ tags, addTask }) {
               )}
             />
           </form>
-          <Typography variant="h6" className={classes.title}>
-            Add
-          </Typography>
-          <IconButton
-            edge="start"
-            className={classes.addButton}
-            color="inherit"
-            aria-label="add task"
+          <Button
+            className={classes.button}
+            color="primary"
+            variant="contained"
             onClick={taskifyAndAdd}
           >
-            <AddIcon />
-          </IconButton>
+            <Typography>Add Task</Typography>
+            <AddIcon className={classes.icon} />
+          </Button>
         </Toolbar>
       </AppBar>
     </div>

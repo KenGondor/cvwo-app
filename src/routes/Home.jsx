@@ -5,8 +5,9 @@ import { Grid, makeStyles } from "@material-ui/core";
 import Grow from "@material-ui/core/Grow";
 import Backdrop from "@material-ui/core/Backdrop";
 import Modal from "@material-ui/core/Modal";
-import Sidebar from "../components/Sidebar.jsx";
-import Header from "../components/Header.jsx";
+import Sidebar from "../components/Sidebar";
+import TaskCard from '../components/TaskCard';
+import Header from "../components/Header";
 import ListPane from "../components/listpane/ListPane";
 import toggleModalView from "../redux/actions/modalOpenAction";
 
@@ -30,12 +31,6 @@ const useStyles = makeStyles((theme) => ({
   },
   task: {
     backgroundColor: "blue",
-  },
-  paper: {
-    backgroundColor: "#FF00FF",
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
   },
 }));
 
@@ -76,7 +71,7 @@ function Home({ modalOpen, modalTask, toggleModalView }) {
         BackdropProps={{ timeout: 500 }}
       >
         <Grow in={modalOpen}>
-          <div className={classes.paper}></div>
+          <TaskCard task={modalTask}/>
         </Grow>
       </Modal>
     </Grid>
