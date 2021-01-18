@@ -8,6 +8,8 @@ const initialState = {
     tasks: [],
     visibilityFilter: ALL_TASK, // default view
     searchWord: '',
+    modalOpen: false,
+    modalTask: {}, // only displayed when the modalOpen is true
 };
 
 // middleware for asynchronous dispatches

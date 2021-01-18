@@ -6,13 +6,15 @@ import {
   ListItem,
   ListItemText,
 } from "@material-ui/core";
-import { toggleCompletionStateOfTask } from "../../redux/actions/tasksActions";
 import { connect } from "react-redux";
+import { toggleCompletionStateOfTask } from "../../redux/actions/tasksActions";
+import setModalTask from "../../redux/actions/modalTaskAction.js";
+import setModalView from "../../redux/actions/modalOpenAction";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    height: 50
+    height: 50,
   },
   typographyStyles: {
     alignSelf: "center",
@@ -21,33 +23,46 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const mapDispatchToProps = (dispatch) => ({
+  setModalView: (open) => dispatch(setModalView(open)),
+  setModalTask: (task) => dispatch(setModalTask(task)),
   toggleCompletionStateOfTask: (task) =>
     dispatch(toggleCompletionStateOfTask(task)),
 });
 
-function ListItemCard({ task, toggleCompletionStateOfTask }) {
+function ListItemCard({
+  task,
+  toggleCompletionStateOfTask,
+  setModalTask,
+  setModalView,
+}) {
   const classes = useStyles();
   const handleChange = () => {
     let updatedTask = {
       ...task,
       completed: !task.completed,
     };
-    toggleCompletionStateOfTask(updatedTask)
+    toggleCompletionStateOfTask(updatedTask);
   };
-  const showTask = () => {
-
+  const showTask = (task) => {
+    setModalTask(task);
+    setModalView(true);
   };
 
   return (
-    <ListItem key={task.id} button onCLick={showTask} className={classes.root}>
-        <ListItemText primary={task.name} className={classes.typographyStyles}/>
-        <IconButton>
-          <Checkbox
-            checked={task.completed}
-            onChange={handleChange}
-            color="primary"
-          />
-        </IconButton>
+    <ListItem
+      key={task.id}
+      button
+      onClick={() => showTask(task)}
+      className={classes.root}
+    >
+      <ListItemText primary={task.name} className={classes.typographyStyles} />
+      <IconButton>
+        <Checkbox
+          checked={task.completed}
+          onChange={handleChange}
+          color="primary"
+        />
+      </IconButton>
     </ListItem>
   );
 }
