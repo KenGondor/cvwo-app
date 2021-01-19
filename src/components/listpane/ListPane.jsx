@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, makeStyles, Typography } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import TaskList from "./TaskList";
 import AddTaskBar from "./AddTaskBar";
 

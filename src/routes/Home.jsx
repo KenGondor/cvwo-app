@@ -10,7 +10,6 @@ import TaskCard from "../components/TaskCard";
 import Header from "../components/Header";
 import ListPane from "../components/listpane/ListPane";
 import toggleModalView from "../redux/actions/modalOpenAction";
-import setModalTask from "../redux/actions/modalTaskAction";
 
 const useStyles = makeStyles((theme) => ({
   root: {
