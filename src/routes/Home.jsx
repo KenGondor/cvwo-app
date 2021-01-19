@@ -6,10 +6,11 @@ import Grow from "@material-ui/core/Grow";
 import Backdrop from "@material-ui/core/Backdrop";
 import Modal from "@material-ui/core/Modal";
 import Sidebar from "../components/Sidebar";
-import TaskCard from '../components/TaskCard';
+import TaskCard from "../components/TaskCard";
 import Header from "../components/Header";
 import ListPane from "../components/listpane/ListPane";
 import toggleModalView from "../redux/actions/modalOpenAction";
+import setModalTask from "../redux/actions/modalTaskAction";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,10 +69,16 @@ function Home({ modalOpen, modalTask, toggleModalView }) {
         className={classes.modal}
         closeAfterTransition
         BackdropComponent={Backdrop}
-        BackdropProps={{ timeout: 500 }}
+        BackdropProps={{ timeout: 1000 }}
       >
-        <Grow in={modalOpen}>
-          <TaskCard task={modalTask}/>
+        <Grow
+          in={modalOpen}
+          style={{ transformOrigin: "0 0 0" }}
+          timeout={750}
+          mountOnEnter
+          unmountOnExit
+        >
+          <TaskCard />
         </Grow>
       </Modal>
     </Grid>

@@ -54,17 +54,15 @@ export const toggleCompletionStateOfTask = ({ id, completed }) => (
 };
 
 export const deleteTask = (id) => (dispatch) => {
+  dispatch({
+    type: types.DELETE_TASK,
+    payload: id,
+  });
   let url = `/api/v1/tasks/${id}`;
   fetch(url, {
     method: "DELETE",
   })
     .then((res) => res.json())
-    .then((res) =>
-      dispatch({
-        type: types.DELETE_TASK,
-        payload: id,
-      })
-    )
     .catch((err) => console.log(err));
 };
 

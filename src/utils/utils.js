@@ -43,6 +43,10 @@ const toDateString = (givenString) => new Date(givenString).toDateString();
 
 const currentDateString = () => new Date(Date.now()).toDateString();
 
+export const isDueToday = task => {
+  return toDateString(task.due) === currentDateString();
+};
+
 const filterDueTodayTask = (tasks) => {
   return tasks.filter((task) => toDateString(task.due) === currentDateString());
 };

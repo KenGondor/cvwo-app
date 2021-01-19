@@ -119,6 +119,7 @@ function Header({ tasks, setFilterToOverdue, setFilterToCustomSearchValue }) {
             onChange={handleChange}
           />
         </div>
+        <div style={{ flex: 1 }} />
         <Tooltip title={"Overdue Tasks"}>
           <IconButton onClick={setFilterToOverdue}>
             <Badge
@@ -126,7 +127,7 @@ function Header({ tasks, setFilterToOverdue, setFilterToCustomSearchValue }) {
               color="error"
               classes={{ colorError: classes.notification }}
             >
-              <AssignmentLateIcon />
+              <AssignmentLateIcon style={{ color: "#FFF" }} />
             </Badge>
           </IconButton>
         </Tooltip>
