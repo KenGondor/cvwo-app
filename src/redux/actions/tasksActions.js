@@ -1,6 +1,6 @@
 import * as types from "./actionTypes";
 
-const prox_url = process.env.prox_URL ? process.env.prox_URL : '';
+const prox_url = process.env.REACT_APP_PROX_URL ? process.env.REACT_APP_PROX_URL : '';
 
 export const fetchTasks = () => (dispatch) => {
   console.log("fetching");
