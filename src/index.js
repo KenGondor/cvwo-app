@@ -9,18 +9,18 @@ import { ThemeProvider } from "@material-ui/core";
 // redux binder for react
 import { Provider } from "react-redux";
 
-import store from './store';
+import store from "./store";
 import { fetchTasks } from "./redux/actions/tasksActions";
 
 store.dispatch(fetchTasks());
 
 ReactDOM.render(
   <Provider store={store}>
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
-  </React.StrictMode>
+    <React.StrictMode>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </React.StrictMode>
   </Provider>,
   document.getElementById("root")
 );
