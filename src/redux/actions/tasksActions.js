@@ -1,8 +1,10 @@
 import * as types from "./actionTypes";
 
+const prox_url = process.env.prox_URL ? process.env.prox_URL : '';
+
 export const fetchTasks = () => (dispatch) => {
   console.log("fetching");
-  fetch("/api/v1/tasks")
+  fetch(prox_url + "/api/v1/tasks")
     .then((res) => res.json())
     .then((res) =>
       dispatch({
@@ -14,7 +16,7 @@ export const fetchTasks = () => (dispatch) => {
 };
 
 export const updateTask = (task) => (dispatch) => {
-  let url = `/api/v1/tasks/${task.id}`;
+  let url = `${prox_url}/api/v1/tasks/${task.id}`;
   let data = {
     method: "PUT",
     headers: {
@@ -37,7 +39,7 @@ export const toggleCompletionStateOfTask = ({ id, completed }) => (
   dispatch
 ) => {
   // Not the most graceful
-  let url = `/api/v1/tasks/${id}`;
+  let url = `${prox_url}/api/v1/tasks/${id}`;
   let data = {
     method: "PUT",
     headers: {
@@ -58,7 +60,7 @@ export const deleteTask = (id) => (dispatch) => {
     type: types.DELETE_TASK,
     payload: id,
   });
-  let url = `/api/v1/tasks/${id}`;
+  let url = `${prox_url}/api/v1/tasks/${id}`;
   fetch(url, {
     method: "DELETE",
   })
@@ -71,7 +73,7 @@ export const updateVisibilityFilter = () => (dispatch) => {};
 export const addTask = ({ name, start, due, priority, description, tag }) => (
   dispatch
 ) => {
-  let url = "/api/v1/tasks";
+  let url = `${prox_url}/api/v1/tasks`;
   let data = {
     method: "POST",
     headers: {
