@@ -12,11 +12,11 @@ The frontend application is done as a separate application. Due to the sake of d
 
 External React library used:
 
-* [Material-UI](https://material-ui.com/)
+- [Material-UI](https://material-ui.com/)
 
 Other libraries used:
 
-* React, Redux, Thunk
+- React, Redux, Thunk
 
 ## CRUD Operations
 
@@ -38,11 +38,9 @@ To delete a task, click on the task on the main list displayed. Click on the dus
 
 Go to the list of completed tasks and uncheck the checkbox.
 
-### Updating the task
+### Updating the task description
 
 The task description can be updated by entering directly into the description box in the displayed task dialog.
-
-To edit the dates, click on "EDIT DATES" and proceed to edit.
 
 ## Screenshot
 

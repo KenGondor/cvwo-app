@@ -49,7 +49,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
   },
-  taskDescription: {},
+  input: {
+    margin: 10,
+  },
 }));
 
 const mapStateToProps = (state) => ({
@@ -62,10 +64,6 @@ const mapDispatchToProps = (dispatch) => ({
   setModalTask: (task) => dispatch(setModalTask(task)),
   setModalView: (open) => dispatch(setModalView(open)),
 });
-
-function EditPanel(props) {
-  return <div hidden={props.index !== props.tabValue}>hfioewh</div>;
-}
 
 function DescriptionPanel(props) {
   return (
@@ -93,11 +91,20 @@ function TaskCard({
 }) {
   const [value, setValue] = React.useState(task.description);
   const [tabVal, setTabVal] = React.useState(0);
+  const [name, setName] = React.useState(task.name);
+  const [due, setDue] = React.useState(task.due);
+  const [start, setStart] = React.useState(task.start);
+  const [priority, setPriority] = React.useState(task.priority);
+
   React.useEffect(() => {
     return () => {
       updateTask({
         id: task.id,
         description: value,
+        due: due,
+        start: start,
+        priority: priority,
+        name: name,
       });
     };
   });
@@ -118,20 +125,20 @@ function TaskCard({
   return (
     <Card className={classes.paper}>
       <CardHeader
-        title={task.name}
+        title={name}
         subheader={
           <div className={classes.subheader}>
             <div className={classes.column}>
               <div className={classes.subOne}>
                 <TodayIcon />
                 <Typography className={classes.date}>
-                  {task.due === null ? "Not Due" : "Due: " + task.due}
+                  {due === null ? "Not Due" : "Due: " + due}
                 </Typography>
               </div>
-              {task.start !== null ? (
+              {start !== null ? (
                 <div className={classes.subOne}>
                   <Typography style={{ marginLeft: 30 }}>
-                    {"Started: " + task.start}
+                    {"Started: " + start}
                   </Typography>
                 </div>
               ) : (
@@ -153,7 +160,6 @@ function TaskCard({
         fullWidth
       >
         <Tab label="Description" />
-        <Tab label="Edit dates" />
       </Tabs>
       <CardContent>
         <DescriptionPanel
@@ -168,7 +174,6 @@ function TaskCard({
         >
           {task.description}
         </DescriptionPanel>
-        <EditPanel index={1} tabValue={tabVal}></EditPanel>
       </CardContent>
     </Card>
   );
