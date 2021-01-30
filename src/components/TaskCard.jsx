@@ -63,6 +63,27 @@ const mapDispatchToProps = (dispatch) => ({
   setModalView: (open) => dispatch(setModalView(open)),
 });
 
+function EditPanel(props) {
+  return <div hidden={props.index !== props.tabValue}>hfioewh</div>;
+}
+
+function DescriptionPanel(props) {
+  return (
+    <div hidden={props.index !== props.tabValue}>
+      <TextField
+        className={props.className}
+        onChange={props.onChange}
+        defaultValue={props.defaultValue}
+        fullWidth
+        multiline
+        variant="outlined"
+      >
+        {props.children}
+      </TextField>
+    </div>
+  );
+}
+
 function TaskCard({
   task,
   deleteTask,
@@ -71,6 +92,7 @@ function TaskCard({
   setModalTask,
 }) {
   const [value, setValue] = React.useState(task.description);
+  const [tabVal, setTabVal] = React.useState(0);
   React.useEffect(() => {
     return () => {
       updateTask({
@@ -89,6 +111,10 @@ function TaskCard({
     setValue(value);
   };
 
+  const changeTab = (event, value) => {
+    setTabVal(value);
+  };
+
   return (
     <Card className={classes.paper}>
       <CardHeader
@@ -104,7 +130,9 @@ function TaskCard({
               </div>
               {task.start !== null ? (
                 <div className={classes.subOne}>
-                  <Typography>{"started: " + task.start}</Typography>
+                  <Typography style={{ marginLeft: 30 }}>
+                    {"Started: " + task.start}
+                  </Typography>
                 </div>
               ) : (
                 ""
@@ -118,20 +146,29 @@ function TaskCard({
           </IconButton>
         }
       />
-      <Tabs value={value} onChange={handleChange}>
+      <Tabs
+        value={tabVal}
+        onChange={changeTab}
+        indicatorColor="primary"
+        fullWidth
+      >
         <Tab label="Description" />
+        <Tab label="Edit dates" />
       </Tabs>
       <CardContent>
-        <TextField
+        <DescriptionPanel
           className={classes.taskDescription}
           onChange={(event) => handleChange(event.target.value)}
           defaultValue={value}
           fullWidth
           multiline
           variant="outlined"
+          index={0}
+          tabValue={tabVal}
         >
           {task.description}
-        </TextField>
+        </DescriptionPanel>
+        <EditPanel index={1} tabValue={tabVal}></EditPanel>
       </CardContent>
     </Card>
   );

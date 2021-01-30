@@ -72,7 +72,7 @@ export const taskVisibilityFilter = (visibilityFilter, tasks) => {
       return filterIncompleteTask(tasks);
 
     case TODAY:
-      return filterDueTodayTask(tasks);
+      return filterDueTodayTask(filterIncompleteTask(tasks));
 
     case COMPLETED:
       return filterCompletedTask(tasks);
