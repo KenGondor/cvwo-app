@@ -4,7 +4,7 @@ export const isDate = (string) => !isNaN(Date.parse(string));
 
 const ciSearch = (a, b) => {
   if (typeof a === "string" && typeof b === "string") {
-    if (a.search(new RegExp(b, "i")) === 0) {
+    if (a.search(new RegExp(b, "i")) >= 0) {
       return true;
     } else {
       return false;

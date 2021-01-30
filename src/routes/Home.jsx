@@ -1,4 +1,3 @@
-// home page of the application
 import React from "react";
 import { connect } from "react-redux";
 import { Grid, makeStyles } from "@material-ui/core";
@@ -14,7 +13,6 @@ import toggleModalView from "../redux/actions/modalOpenAction";
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
-    // backgroundImage: `url(${Image})`,
     backgroundSize: "cover",
     minWidth: 1000,
   },

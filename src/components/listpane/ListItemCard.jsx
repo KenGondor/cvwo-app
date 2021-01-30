@@ -52,10 +52,9 @@ function ListItemCard({
     <ListItem
       key={task.id}
       button
-      onClick={() => showTask(task)}
       className={classes.root}
     >
-      <ListItemText primary={task.name} className={classes.typographyStyles} />
+      <ListItemText onClick={() => showTask(task)} primary={task.name} className={classes.typographyStyles} />
       <IconButton>
         <Checkbox
           checked={task.completed}
