@@ -29,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
   },
   typo: {
     paddingLeft: 10,
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    }
   },
   search: {
     position: "relative",

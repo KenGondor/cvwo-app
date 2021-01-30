@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   button: {
     marginLeft: theme.spacing(2),
     textTransform: "none",
-    paddingRight: '1%'
+    paddingRight: "1%",
   },
   icon: {
     marginLeft: 4,
@@ -32,11 +32,20 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     width: "25ch",
     flex: 3,
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
   },
   input: {
     marginLeft: 5,
     marginRight: 5,
   },
+  spacer: {
+    flex: 1,
+    [theme.breakpoints.up('sm')]: {
+      display: 'none'
+    }
+  }
 }));
 
 const mapStateToProps = (state) => ({
@@ -58,7 +67,6 @@ function AddTaskBar({ tags, addTask }) {
   const getHelperText = () => {
     return dateErrorState ? "Invalid Date: yyyy-MM-dd" : "";
   };
-  const [taskIsCorrect, setTaskIsCorrect] = React.useState(true);
   const validateDateAndWrite = (func, event) => {
     func(event.target.value);
     if (event.target.value.length === 0 || isDate(event.target.value)) {
@@ -152,6 +160,7 @@ function AddTaskBar({ tags, addTask }) {
               )}
             />
           </form>
+          <div className={classes.spacer}/>
           <Button
             className={classes.button}
             color="primary"

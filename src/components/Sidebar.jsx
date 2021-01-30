@@ -24,6 +24,9 @@ import setVisibilityFilter from "../redux/actions/visibilityFilterActions";
 const useStyles = makeStyles((theme) => ({
   sidebar: {
     width: "100%",
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
   },
   nested: {
     paddingLeft: theme.spacing(3),
